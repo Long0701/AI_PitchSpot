@@ -1,6 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import 'leaflet/dist/leaflet.css';
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -120,60 +119,5 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-}
-
-/* Leaflet map styles */
-.leaflet-container {
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-}
-
-.leaflet-popup-content-wrapper {
-  border-radius: 8px;
-}
-
-.sport-icon {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  font-size: 12px;
-}
-
-.sport-football {
-  background-color: #22c55e;
-}
-.sport-badminton {
-  background-color: #3b82f6;
-}
-.sport-tennis {
-  background-color: #f59e0b;
-}
-.sport-volleyball {
-  background-color: #ef4444;
-}
-.sport-basketball {
-  background-color: #8b5cf6;
-}
-.sport-pickleball {
-  background-color: #06b6d4;
-}
-
-/* Custom animations */
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
   }
 }
