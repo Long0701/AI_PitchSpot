@@ -16,11 +16,18 @@ export enum UserRole {
   Owner = "owner",
 }
 
+export interface CourtTypeCount {
+  footballType: "5" | "7" | "11" | "futsal"
+  count: number
+  hourlyRate: number
+}
+
 export interface Court {
   id: string
   name: string
   description: string
   sportType: SportType
+  courtTypes?: CourtTypeCount[] // danh sách các loại sân và số lượng tương ứng (chỉ dành cho football)
   location: {
     lat: number
     lng: number
@@ -30,6 +37,7 @@ export interface Court {
   pricing: {
     hourlyRate: number
     currency: string
+    ratesByFootballType?: Record<"5" | "7" | "11", number> // nếu muốn giá theo từng loại sân
   }
   images: string[]
   amenities: string[]
