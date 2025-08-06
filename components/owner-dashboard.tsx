@@ -1,17 +1,17 @@
 "use client"
 
-import { useState } from "react"
+import { AnalyticsDashboard } from "@/components/analytics-dashboard"
+import { useAuth } from "@/components/auth-provider"
+import { BookingCalendar } from "@/components/booking-calendar"
+import { CourtManagement } from "@/components/court-management"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { useAuth } from "@/components/auth-provider"
-import { mockCourts, mockBookings } from "@/lib/mock-data"
-import { BookingStatus } from "@/lib/types" // Import BookingStatus and UserRole enums
-import { Calendar, BarChart3, LogOut, Building, DollarSign, Users, TrendingUp } from "lucide-react"
-import { CourtManagement } from "@/components/court-management"
-import { BookingCalendar } from "@/components/booking-calendar"
-import { AnalyticsDashboard } from "@/components/analytics-dashboard"
-import { formatVND } from "@/lib/utils" // Import formatVND
+import { mockBookings, mockCourts } from "@/lib/mock-data"
+import { BookingStatus } from "@/lib/types"; // Import BookingStatus and UserRole enums
+import { formatVND } from "@/lib/utils"; // Import formatVND
+import { BarChart3, Building, Calendar, DollarSign, LogOut, TrendingUp, Users } from "lucide-react"
+import { useState } from "react"
 
 export function OwnerDashboard() {
   const { user, logout } = useAuth()
@@ -231,10 +231,10 @@ export function OwnerDashboard() {
 
             {activeTab === "calendar" && (
               <div className="space-y-6">
-                <div>
+                {/* <div>
                   <h1 className="text-2xl font-bold text-gray-900 mb-2">Lịch Đặt Sân</h1>
                   <p className="text-gray-600">Xem và quản lý tất cả lượt đặt trong chế độ xem lịch</p>
-                </div>
+                </div> */}
                 <BookingCalendar />
               </div>
             )}
