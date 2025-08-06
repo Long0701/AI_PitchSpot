@@ -16,39 +16,38 @@ export function LandingPage() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsLoading(true)
-    const formData = new FormData(e.currentTarget)
-    const email = formData.get("email") as string
-    const password = formData.get("password") as string
-    const role = formData.get("role") as UserRole // Use UserRole enum
+    e.preventDefault();
+    setIsLoading(true);
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
 
     try {
-      await login(email, password, role)
+      await login(email, password);
     } catch (error) {
-      console.error("Login failed:", error)
+      console.error("Login failed:", error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsLoading(true)
-    const formData = new FormData(e.currentTarget)
-    const name = formData.get("name") as string
-    const email = formData.get("email") as string
-    const password = formData.get("password") as string
-    const role = formData.get("role") as UserRole // Use UserRole enum
+    e.preventDefault();
+    setIsLoading(true);
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    const role = formData.get("role") as UserRole; // Use UserRole enum
 
     try {
-      await register(name, email, password, role)
+      await register(name, email, password, role);
     } catch (error) {
-      console.error("Registration failed:", error)
+      console.error("Registration failed:", error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -185,18 +184,6 @@ export function LandingPage() {
                         placeholder="••••••••"
                         required
                       />
-                    </div>
-                    <div>
-                      <Label htmlFor="login-role">Tôi là</Label>
-                      <select
-                        id="login-role"
-                        name="role"
-                        className="w-full p-2 border rounded-md"
-                        required
-                      >
-                        <option value={UserRole.Player}>Người Dùng</option>
-                        <option value={UserRole.Owner}>Chủ Sân</option>
-                      </select>
                     </div>
                     <Button
                       type="submit"

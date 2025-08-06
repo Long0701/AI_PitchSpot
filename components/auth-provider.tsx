@@ -34,33 +34,78 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(false)
   }, [])
 
-  const login = async (email: string, password: string, role: UserRole = UserRole.Player) => {
-    // Mock login - in real app, this would call your API
-    const mockUser: User = {
-      id: Math.random().toString(36).substr(2, 9),
-      name: email.split("@")[0],
-      email,
-      role,
-      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
+  const login = async (
+    email: string,
+    password: string,
+    role: UserRole = UserRole.Player
+  ) => {
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password, role }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Login failed");
+      }
+
+      const userData: User = {
+        id: data.data.id,
+        name: data.data.name,
+        email: data.data.email,
+        role: data.data.role,
+        avatar: data.data.avatar,
+      };
+
+      setUser(userData);
+      localStorage.setItem("SmartSport-user", JSON.stringify(userData));
+    } catch (error) {
+      console.error("Login error:", error);
+      throw error;
     }
+  };
 
-    setUser(mockUser)
-    localStorage.setItem("SmartSport-user", JSON.stringify(mockUser))
-  }
+  const register = async (
+    name: string,
+    email: string,
+    password: string,
+    role: UserRole
+  ) => {
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password, role }),
+      });
 
-  const register = async (name: string, email: string, password: string, role: UserRole) => {
-    // Mock registration
-    const mockUser: User = {
-      id: Math.random().toString(36).substr(2, 9),
-      name,
-      email,
-      role,
-      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Registration failed");
+      }
+
+      const userData: User = {
+        id: data.data.id,
+        name: data.data.name,
+        email: data.data.email,
+        role: data.data.role,
+        avatar: data.data.avatar,
+      };
+
+      setUser(userData);
+      localStorage.setItem("SmartSport-user", JSON.stringify(userData));
+    } catch (error) {
+      console.error("Registration error:", error);
+      throw error;
     }
-
-    setUser(mockUser)
-    localStorage.setItem("SmartSport-user", JSON.stringify(mockUser))
-  }
+  };
 
   const logout = () => {
     setUser(null)
